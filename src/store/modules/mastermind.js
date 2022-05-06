@@ -16,13 +16,6 @@ const state = {
   },
   currentColor: '',
   completeSlotsList: [],
-
-  inputSlot: {
-    black_pegs: 0,
-    code: ['lightgrey', 'lightgrey', 'lightgrey', 'lightgrey'],
-    disabled: false,
-    white_pegs: 0
-  },
   availableSlot: {
     black_pegs: 0,
     code: ['grey', 'grey', 'grey', 'grey'],
@@ -69,6 +62,7 @@ const actions = {
       const response = await axios.post(baseUrl, data)
       commit('setGuesses', response.data.guesses)
       commit('setMaxGuesses', response.data.max_guesses)
+      commit('setGameStatus', response.data.status)
       commit('setUpdateGuessesTable')
     } catch (e) {
       console.error(e)
@@ -107,6 +101,12 @@ const mutations = {
     const fullList = []
     const availableSlotsCount = state.maxGuesses - state.guesses.length
     const hasCheckedVals = state.currentGuess.code.find((a) => a === 'lightgrey')
+    const emptySlot = {
+      black_pegs: 0,
+      code: ['lightgrey', 'lightgrey', 'lightgrey', 'lightgrey'],
+      disabled: false,
+      white_pegs: 0
+    }
 
     // Add guesses with disabled true
     state.guesses.map(guess => fullList.push({ ...guess, disabled: true }))
@@ -115,14 +115,7 @@ const mutations = {
     if (!state.hasInput) {
       hasCheckedVals
         ? fullList.push(state.inputSlot)
-        : fullList.push(
-          {
-            black_pegs: 0,
-            code: ['lightgrey', 'lightgrey', 'lightgrey', 'lightgrey'],
-            disabled: false,
-            white_pegs: 0
-          }
-        )
+        : fullList.push(emptySlot)
     } else {
       state.completeSlotsList.forEach((option) => {
         if (!option.disabled) {

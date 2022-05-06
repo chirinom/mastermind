@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <ColorsBar />
-    <ColorSlotsTable />
+    <ColorInputs />
     <FeedbackSection />
   </div>
 </template>
@@ -9,14 +9,14 @@
 <script>
 import { mapActions } from 'vuex'
 import ColorsBar from './ColorsBar.vue'
-import ColorSlotsTable from './ColorSlotsTable.vue'
+import ColorInputs from './ColorInputs.vue'
 import FeedbackSection from './FeedbackSection.vue'
 
 export default {
   name: 'Mastermind',
   components: {
     ColorsBar,
-    ColorSlotsTable,
+    ColorInputs,
     FeedbackSection
   },
   data () {
@@ -32,7 +32,7 @@ export default {
     ...mapActions(['getGame'])
   },
   mounted () {
-    this.getGame(5)
+    this.getGame(6)
   }
 }
 </script>
