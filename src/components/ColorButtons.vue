@@ -16,7 +16,7 @@ export default {
   name: 'ColorButtons',
   props: {},
   computed: {
-    ...mapGetters(['availableColors', 'currentGuess'])
+    ...mapGetters(['availableColors'])
   },
   methods: {
     ...mapMutations(['setCurrentColor'])

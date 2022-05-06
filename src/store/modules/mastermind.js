@@ -10,12 +10,12 @@ const state = {
   secretCode: [],
   gameStatus: '',
 
-  inputState: false,
-
-  currentGuess: [],
+  hasInput: false,
+  currentGuess: {
+    code: []
+  },
   currentColor: '',
   completeSlotsList: [],
-  completeSlotsListRender: [],
 
   inputSlot: {
     black_pegs: 0,
@@ -57,16 +57,19 @@ const actions = {
       commit('setNumberOfSlots', response.data.num_slots)
       commit('setSecretCode', response.data.secret_code)
       commit('setGameStatus', response.data.status)
-
       commit('setUpdateGuessesTable')
     } catch (e) {
       console.error(e)
     }
   },
-  async createNewGuess ({ commit }, data) {
-    const baseUrl = 'http://localhost:8000/api/games/2/guesses/'
+  async createNewGuess ({ commit }) {
+    const baseUrl = `http://localhost:8000/api/games/${state.id}/guesses/`
+    const data = state.currentGuess
     try {
-      await axios.post(baseUrl, data)
+      const response = await axios.post(baseUrl, data)
+      commit('setGuesses', response.data.guesses)
+      commit('setMaxGuesses', response.data.max_guesses)
+      commit('setUpdateGuessesTable')
     } catch (e) {
       console.error(e)
     }
@@ -75,8 +78,8 @@ const actions = {
     commit('setHandleInputChange', data)
     commit('setUpdateGuessesTable')
   },
-  updateGuessesTable ({ commit }, data) {
-    commit('setUpdateGuessesTable', data)
+  updateGuessesTable ({ commit }) {
+    commit('setUpdateGuessesTable')
   }
 }
 const mutations = {
@@ -88,39 +91,50 @@ const mutations = {
   setNumberOfSlots: (state, data) => (state.numberOfSlots = data),
   setSecretCode: (state, data) => (state.secretCode = data),
   setGameStatus: (state, data) => (state.gameStatus = data),
-
   setCurrentColor: (state, data) => (state.currentColor = data),
+
+  setHandleInputChange: (state, data) => {
+    state.completeSlotsList.forEach((option) => {
+      if (!option.disabled) {
+        state.hasInput = true
+        option.code[data.index] = data.color
+        state.currentGuess.code = option.code
+      }
+    })
+  },
 
   setUpdateGuessesTable: (state) => {
     const fullList = []
     const availableSlotsCount = state.maxGuesses - state.guesses.length
+    const hasCheckedVals = state.currentGuess.code.find((a) => a === 'lightgrey')
+
     // Add guesses with disabled true
     state.guesses.map(guess => fullList.push({ ...guess, disabled: true }))
 
     // Add input slot or user input
-    if (!state.inputState) {
-      fullList.push(state.inputSlot)
+    if (!state.hasInput) {
+      hasCheckedVals
+        ? fullList.push(state.inputSlot)
+        : fullList.push(
+          {
+            black_pegs: 0,
+            code: ['lightgrey', 'lightgrey', 'lightgrey', 'lightgrey'],
+            disabled: false,
+            white_pegs: 0
+          }
+        )
     } else {
       state.completeSlotsList.forEach((option) => {
         if (!option.disabled) {
           fullList.push({ ...option, code: option.code })
         }
       })
-      state.inputState = false
     }
 
     // Add available slots
     for (let i = 0; i < availableSlotsCount - 1; i++) { fullList.push(state.availableSlot) }
     state.completeSlotsList = fullList
-  },
-  setHandleInputChange: (state, data) => {
-    state.completeSlotsList.forEach((option) => {
-      if (!option.disabled) {
-        state.inputState = true
-        option.code[data.index] = data.color
-        state.currentGuess = option.code
-      }
-    })
+    state.hasInput = false
   }
 }
 

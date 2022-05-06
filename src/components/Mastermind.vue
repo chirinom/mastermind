@@ -2,6 +2,7 @@
   <div class="wrapper">
     <ColorsBar />
     <ColorSlotsTable />
+    <FeedbackSection />
   </div>
 </template>
 
@@ -9,12 +10,14 @@
 import { mapActions } from 'vuex'
 import ColorsBar from './ColorsBar.vue'
 import ColorSlotsTable from './ColorSlotsTable.vue'
+import FeedbackSection from './FeedbackSection.vue'
 
 export default {
   name: 'Mastermind',
   components: {
     ColorsBar,
-    ColorSlotsTable
+    ColorSlotsTable,
+    FeedbackSection
   },
   data () {
     return {
@@ -29,7 +32,7 @@ export default {
     ...mapActions(['getGame'])
   },
   mounted () {
-    this.getGame(1)
+    this.getGame(5)
   }
 }
 </script>
