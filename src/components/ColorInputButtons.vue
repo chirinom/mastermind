@@ -2,27 +2,39 @@
   <div class="colors-container">
     <div
       v-for="(guess, index) in completeSlotsList"
-      :key="guess + '-' + index"
+      :key="index"
       class="colors-guess"
     >
       <button
-        v-for="(color, index) in guess.code" :key="color + '-' + index"
+        v-for="(color, index) in guess.code"
+        :key="index"
         :class="`btn color-btn__` + color"
         :disabled="guess.disabled"
         @click="handleInput(index)"
       >
       </button>
+      <FeedbackPegs
+        :blackPegs="guess.black_pegs"
+        :whitePegs="guess.white_pegs"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import FeedbackPegs from './FeedbackPegs.vue'
 
 export default {
   name: 'ColorInputButtons',
+  components: {
+    FeedbackPegs
+  },
   computed: {
-    ...mapGetters(['completeSlotsList', 'currentColor'])
+    ...mapGetters([
+      'completeSlotsList',
+      'currentColor'
+    ])
   },
   methods: {
     ...mapActions(['handleInputChange']),
@@ -79,6 +91,9 @@ export default {
   }
   &__white {
     background-color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(197, 197, 197);
   }
   &__lightgrey {
     background-color: lightgray;

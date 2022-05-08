@@ -4,7 +4,7 @@
   <div class="board">
     <ColorInputButtons />
   </div>
-  <FeedbackSection />
+  <ControlSection />
 </div>
 </template>
 
@@ -12,14 +12,14 @@
 import { mapActions } from 'vuex'
 import ColorsBar from './ColorsBar.vue'
 import ColorInputButtons from './ColorInputButtons.vue'
-import FeedbackSection from './FeedbackSection.vue'
+import ControlSection from './ControlSection.vue'
 
 export default {
   name: 'Mastermind',
   components: {
     ColorsBar,
     ColorInputButtons,
-    FeedbackSection
+    ControlSection
   },
   data () {
     return {
@@ -34,7 +34,7 @@ export default {
     ...mapActions(['getGame'])
   },
   mounted () {
-    this.getGame(7)
+    this.getGame(8)
   }
 }
 </script>

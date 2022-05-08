@@ -27,7 +27,8 @@ const getters = {
   availableColors: (state) => state.availableColors,
   currentGuess: (state) => state.currentGuess,
   currentColor: (state) => state.currentColor,
-  completeSlotsList: (state) => state.completeSlotsList
+  completeSlotsList: (state) => state.completeSlotsList,
+  gameStatus: (state) => state.gameStatus
 }
 const actions = {
   createNewGame ({ commit }, data) {
