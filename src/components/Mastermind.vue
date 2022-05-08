@@ -1,9 +1,7 @@
 <template>
 <div class="wrapper">
   <ColorsBar class="colors-bar" />
-  <div class="board">
-    <ColorInputButtons />
-  </div>
+  <ColorInputButtons />
   <ControlSection />
 </div>
 </template>
@@ -45,13 +43,5 @@ export default {
   & .colors-bar {
     padding: 30px 0;
   }
-}
-.board {
-  display: flex;
-  justify-content: center;
-  padding: 30px 50px;
-  width: fit-content;
-  background-color: white;
-  border-radius: 4px;
 }
 </style>
