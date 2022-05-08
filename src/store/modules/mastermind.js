@@ -21,7 +21,8 @@ const state = {
     code: ['grey', 'grey', 'grey', 'grey'],
     disabled: true,
     white_pegs: 0
-  }
+  },
+  checkEnabled: true
 }
 const getters = {
   id: (state) => state.id,
@@ -29,7 +30,8 @@ const getters = {
   currentGuess: (state) => state.currentGuess,
   currentColor: (state) => state.currentColor,
   completeSlotsList: (state) => state.completeSlotsList,
-  gameStatus: (state) => state.gameStatus
+  gameStatus: (state) => state.gameStatus,
+  checkEnabled: (state) => state.checkEnabled
 }
 const actions = {
   async createNewGame ({ dispatch }) {
@@ -97,6 +99,9 @@ const mutations = {
         state.hasInput = true
         option.code[data.index] = data.color
         state.currentGuess.code = option.code
+        if (state.currentGuess.code.find((a) => a === 'lightgrey') === undefined) {
+          state.checkEnabled = false
+        }
       }
     })
   },
@@ -104,7 +109,7 @@ const mutations = {
   setUpdateGuessesTable: (state) => {
     const fullList = []
     const availableSlotsCount = state.maxGuesses - state.guesses.length
-    const hasCheckedVals = state.currentGuess.code.find((a) => a === 'lightgrey')
+    const inputNotComplete = state.currentGuess.code.find((a) => a === 'lightgrey') !== undefined
     const emptySlot = {
       black_pegs: 0,
       code: ['lightgrey', 'lightgrey', 'lightgrey', 'lightgrey'],
@@ -112,14 +117,15 @@ const mutations = {
       white_pegs: 0
     }
 
-    // Add guesses with disabled true
+    // Add guesses
     state.guesses.map(guess => fullList.push({ ...guess, disabled: true }))
 
     // Add empty slot or user input
     if (!state.hasInput) {
-      hasCheckedVals
+      inputNotComplete
         ? fullList.push(state.inputSlot)
         : fullList.push(emptySlot)
+      state.checkEnabled = true
     } else {
       state.completeSlotsList.forEach((option) => {
         if (!option.disabled) {
@@ -132,7 +138,6 @@ const mutations = {
     for (let i = 0; i < availableSlotsCount - 1; i++) { fullList.push(state.availableSlot) }
     state.completeSlotsList = fullList
     state.hasInput = false
-    console.log(state.currentGuess)
   }
 }
 

@@ -54,7 +54,6 @@ export default {
   padding: 30px 50px;
   background-color: white;
   border-radius: 4px;
-
 }
 .colors-guess {
   display: flex;

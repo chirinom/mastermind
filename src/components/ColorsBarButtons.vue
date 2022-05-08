@@ -1,5 +1,9 @@
 <template>
   <div class="colors-container">
+    <div class="current-color">
+      <span class="label">Current Color</span>
+      <button :class="`btn color-btn__` + currentColor" :disabled="true"></button>
+    </div>
     <button
       v-for="(color, index) in availableColors" :key="index"
       @click="setCurrentColor($event.target.value)"
@@ -15,7 +19,7 @@ import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'ColorsBarButtons',
   computed: {
-    ...mapGetters(['availableColors'])
+    ...mapGetters(['availableColors', 'currentColor'])
   },
   methods: {
     ...mapMutations(['setCurrentColor'])
@@ -27,6 +31,23 @@ export default {
 .colors-container {
   max-width: 77px;
   padding: 0 15px 0 0;
+
+  & .current-color {
+    border-style: solid;
+    border-width: 1px;
+    border-color: lightgray;
+    border-radius: 4px;
+    padding: 2px;
+    cursor: not-allowed;
+
+    & button {
+      cursor: not-allowed;
+    }
+    & .label {
+      font-size: 12px;
+      font-weight: bold;
+    }
+  }
 }
 .btn {
   margin: 12px;
@@ -45,7 +66,6 @@ export default {
 }
 
 .color-btn {
-
   &__red {
     background-color: red;
   }

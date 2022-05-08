@@ -1,5 +1,7 @@
 <template>
-  <ColorButtons :options="availableColors"/>
+  <div class="colors-bar">
+    <ColorButtons :options="availableColors"/>
+  </div>
 </template>
 
 <script>
@@ -16,3 +18,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .colors-bar {
+    padding: 30px 0;
+  }
+</style>

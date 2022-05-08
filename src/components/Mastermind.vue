@@ -36,8 +36,5 @@ export default {
 <style scoped lang="scss">
 .wrapper {
   display: flex;
-  & .colors-bar {
-    padding: 30px 0;
-  }
 }
 </style>
