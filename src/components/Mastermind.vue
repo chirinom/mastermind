@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import ColorsBar from './ColorsBar.vue'
 import ColorInputButtons from './ColorInputButtons'
 import ControlSection from './ControlSection.vue'
@@ -19,20 +19,16 @@ export default {
     ColorInputButtons,
     ControlSection
   },
-  data () {
-    return {
-      newGameBody: {
-        num_colors: 6,
-        num_slots: 4,
-        max_guesses: 10 // Optional
-      }
-    }
+  computed: {
+    ...mapGetters(['id'])
   },
   methods: {
     ...mapActions(['getGame'])
   },
   mounted () {
-    this.getGame(8)
+    if (this.id) {
+      this.getGame(this.id)
+    }
   }
 }
 </script>

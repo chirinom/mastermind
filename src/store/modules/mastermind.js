@@ -24,6 +24,7 @@ const state = {
   }
 }
 const getters = {
+  id: (state) => state.id,
   availableColors: (state) => state.availableColors,
   currentGuess: (state) => state.currentGuess,
   currentColor: (state) => state.currentColor,
@@ -31,10 +32,12 @@ const getters = {
   gameStatus: (state) => state.gameStatus
 }
 const actions = {
-  createNewGame ({ commit }, data) {
+  async createNewGame ({ dispatch }) {
+    const gameSettings = { num_colors: 6, num_slots: 4, max_guesses: 10 }
     const baseUrl = 'http://localhost:8000/api/games/'
     try {
-      axios.post(baseUrl, data)
+      const response = await axios.post(baseUrl, gameSettings)
+      dispatch('getGame', response.data.id)
     } catch (e) {
       console.error(e)
     }
@@ -129,6 +132,7 @@ const mutations = {
     for (let i = 0; i < availableSlotsCount - 1; i++) { fullList.push(state.availableSlot) }
     state.completeSlotsList = fullList
     state.hasInput = false
+    console.log(state.currentGuess)
   }
 }
 
