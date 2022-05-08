@@ -1,17 +1,17 @@
 <template>
   <div class="colors-bar">
-    <ColorButtons :options="availableColors"/>
+    <ColorsBarList :options="availableColors"/>
   </div>
 </template>
 
 <script>
-import ColorButtons from './ColorsBarButtons.vue'
+import ColorsBarList from './ColorsBarList.vue'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'ColorsBar',
   components: {
-    ColorButtons
+    ColorsBarList
   },
   computed: {
     ...mapGetters(['availableColors'])
