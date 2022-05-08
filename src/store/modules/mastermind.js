@@ -113,7 +113,9 @@ const mutations = {
 
     // Add empty slot or user input
     if (!state.inputChange && inputComplete) {
-      fullList.push(emptyInputSlot)
+      state.gameStatus === 'running'
+        ? fullList.push(emptyInputSlot)
+        : fullList.push(state.availableSlot)
       state.createGuessDisabled = true
     } else {
       state.completeSlotsList.forEach((option) => {
