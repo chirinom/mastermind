@@ -5,9 +5,6 @@ const state = {
   guesses: [],
   id: null,
   maxGuesses: 0,
-  numberOfColors: 0,
-  numberOfSlots: 0,
-  secretCode: [],
   gameStatus: '',
 
   hasInput: false,
@@ -22,7 +19,7 @@ const state = {
     disabled: true,
     white_pegs: 0
   },
-  checkEnabled: true
+  createGuessDisabled: true
 }
 const getters = {
   id: (state) => state.id,
@@ -31,7 +28,7 @@ const getters = {
   currentColor: (state) => state.currentColor,
   completeSlotsList: (state) => state.completeSlotsList,
   gameStatus: (state) => state.gameStatus,
-  checkEnabled: (state) => state.checkEnabled
+  createGuessDisabled: (state) => state.createGuessDisabled
 }
 const actions = {
   async createNewGame ({ dispatch }) {
@@ -52,9 +49,6 @@ const actions = {
       commit('setGuesses', response.data.guesses)
       commit('setId', response.data.id)
       commit('setMaxGuesses', response.data.max_guesses)
-      commit('setNumberOfColors', response.data.num_colors)
-      commit('setNumberOfSlots', response.data.num_slots)
-      commit('setSecretCode', response.data.secret_code)
       commit('setGameStatus', response.data.status)
       commit('setUpdateGuessesTable')
     } catch (e) {
@@ -87,9 +81,6 @@ const mutations = {
   setGuesses: (state, data) => (state.guesses = data),
   setId: (state, data) => (state.id = data),
   setMaxGuesses: (state, data) => (state.maxGuesses = data),
-  setNumberOfColors: (state, data) => (state.numberOfColors = data),
-  setNumberOfSlots: (state, data) => (state.numberOfSlots = data),
-  setSecretCode: (state, data) => (state.secretCode = data),
   setGameStatus: (state, data) => (state.gameStatus = data),
   setCurrentColor: (state, data) => (state.currentColor = data),
 
@@ -100,7 +91,7 @@ const mutations = {
         option.code[data.index] = data.color
         state.currentGuess.code = option.code
         if (state.currentGuess.code.find((a) => a === 'lightgrey') === undefined) {
-          state.checkEnabled = false
+          state.createGuessDisabled = false
         }
       }
     })
@@ -109,8 +100,8 @@ const mutations = {
   setUpdateGuessesTable: (state) => {
     const fullList = []
     const availableSlotsCount = state.maxGuesses - state.guesses.length
-    const inputNotComplete = state.currentGuess.code.find((a) => a === 'lightgrey') !== undefined
-    const emptySlot = {
+    const inputComplete = state.currentGuess.code.find((a) => a === 'lightgrey') === undefined
+    const emptyInputSlot = {
       black_pegs: 0,
       code: ['lightgrey', 'lightgrey', 'lightgrey', 'lightgrey'],
       disabled: false,
@@ -121,11 +112,9 @@ const mutations = {
     state.guesses.map(guess => fullList.push({ ...guess, disabled: true }))
 
     // Add empty slot or user input
-    if (!state.hasInput) {
-      inputNotComplete
-        ? fullList.push(state.inputSlot)
-        : fullList.push(emptySlot)
-      state.checkEnabled = true
+    if (!state.hasInput && inputComplete) {
+      fullList.push(emptyInputSlot)
+      state.createGuessDisabled = true
     } else {
       state.completeSlotsList.forEach((option) => {
         if (!option.disabled) {

@@ -1,7 +1,7 @@
 <template>
   <div class="control-wrapper">
     <button class="btn start-game" @click="createNewGame">Start new game</button>
-    <button class="btn check-answer" @click="createNewGuess" :disabled="checkEnabled">Check Answer</button>
+    <button class="btn check-answer" @click="createNewGuess" :disabled="createGuessDisabled">Check Answer</button>
     <span :class="['label', gameStatus]">{{gameStatus}}</span>
 
   </div>
@@ -13,7 +13,7 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'FeedbackSection',
   computed: {
-    ...mapGetters(['gameStatus', 'checkEnabled'])
+    ...mapGetters(['gameStatus', 'createGuessDisabled'])
   },
   methods: {
     ...mapActions(['createNewGuess', 'createNewGame'])
