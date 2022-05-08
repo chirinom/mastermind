@@ -1,5 +1,5 @@
 context('Mastermind Game Test', () => {
-  it('Should win the game, enable "check answer" button and display running and win labels', () => {
+  it('Should select color, type winner answer, enable "check answer" button and display running and win labels', () => {
     cy.visit('http://localhost:8080/')
     cy.get('.start-game').click()
 
