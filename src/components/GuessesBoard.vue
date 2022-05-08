@@ -1,5 +1,5 @@
 <template>
-  <div class="board-wrapper">
+  <div v-if="completeSlotsList.length" class="board-wrapper">
     <div
       v-for="(guess, index) in completeSlotsList"
       :key="index"
