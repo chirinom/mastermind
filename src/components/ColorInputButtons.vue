@@ -51,12 +51,14 @@ export default {
 
 <style lang="scss" scoped>
 .colors-container {
-  padding: 30px 50px;
+  padding: 30px 40px;
   background-color: white;
   border-radius: 4px;
+  min-width: 342px;
 }
 .colors-guess {
   display: flex;
+  justify-content: center;
 }
 .btn {
   margin: 12px;
