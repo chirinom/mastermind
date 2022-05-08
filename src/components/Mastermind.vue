@@ -31,16 +31,15 @@ export default {
 .wrapper {
   display: flex;
   padding: 20px 90px 90px;
+  justify-content: center;
 }
 @media screen and (max-width: 950px) {
   .mastermind {
-    padding: 0;
+    padding: 0 8px;
+    width: 100%;
   }
 }
 @media screen and (max-width: 580px) {
-  .mastermind {
-    padding: 0;
-  }
   .wrapper {
     display: block;
     padding: 0;

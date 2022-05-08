@@ -1,6 +1,6 @@
 <template>
   <div class="bar-container">
-    <div class="current-color">
+    <div v-if="availableColors.length" class="current-color">
       <span class="label">Current Color</span>
       <Button :color="currentColor" :disabled="true"/>
     </div>
@@ -58,6 +58,12 @@ export default {
     padding: 0;
     max-width: none;
     width: 100%;
+    display: flex;
+
+    & .current-color {
+      margin: 0 0 12px;
+    }
   }
+
 }
 </style>

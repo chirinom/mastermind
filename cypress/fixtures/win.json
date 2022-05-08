@@ -1,0 +1,14 @@
+{
+  "colors":["red","blue","green","yellow","orange","white"],
+  "id":141,
+  "secret_code":["red","red","red","red"],
+  "reference":"D7D401C8B9",
+  "guesses":[
+    {"black_pegs":1,"code":["red","red","red","red"],"white_pegs":0},
+    {"black_pegs":3,"code":["green","green","ren","orange"],"white_pegs":0}
+  ],
+  "status":"won",
+  "num_slots":4,
+  "max_guesses":10,
+  "num_colors":6
+}

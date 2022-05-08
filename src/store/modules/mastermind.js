@@ -29,23 +29,14 @@ const getters = {
   createGuessDisabled: (state) => state.createGuessDisabled
 }
 const actions = {
-  async createNewGame ({ dispatch }) {
+  async createNewGame ({ commit }) {
     const gameSettings = { num_colors: 6, num_slots: 4, max_guesses: 10 }
     const baseUrl = 'http://localhost:8000/api/games/'
     try {
       const response = await axios.post(baseUrl, gameSettings)
-      dispatch('getGame', response.data.id)
-    } catch (e) {
-      console.error(e)
-    }
-  },
-  async getGame ({ commit }, id) {
-    const baseUrl = `http://localhost:8000/api/games/${id}`
-    try {
-      const response = await axios.get(baseUrl)
+      commit('setId', response.data.id)
       commit('setAvailableColors', response.data.colors)
       commit('setGuesses', response.data.guesses)
-      commit('setId', response.data.id)
       commit('setMaxGuesses', response.data.max_guesses)
       commit('setGameStatus', response.data.status)
       commit('setUpdateGuessesTable')

@@ -3,7 +3,6 @@
     <button class="btn start-game" @click="createNewGame">Start new game</button>
     <button class="btn check-answer" @click="createNewGuess" :disabled="createGuessDisabled">Check Answer</button>
     <span :class="['label', gameStatus]">{{gameStatus}}</span>
-
   </div>
 </template>
 
@@ -76,7 +75,6 @@ export default {
 @media screen and (max-width: 580px) {
   .control-wrapper {
     max-width: none;
-    padding: 0;
   }
   .btn.check-answer {
     margin: 0;
