@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
 import ColorsBar from './ColorsBar.vue'
 import GuessesBoard from './GuessesBoard.vue'
 import ControlSection from './ControlSection.vue'
@@ -21,17 +20,6 @@ export default {
     ColorsBar,
     GuessesBoard,
     ControlSection
-  },
-  computed: {
-    ...mapGetters(['id'])
-  },
-  methods: {
-    ...mapActions(['getGame'])
-  },
-  mounted () {
-    if (this.id) {
-      this.getGame(this.id)
-    }
   }
 }
 </script>
