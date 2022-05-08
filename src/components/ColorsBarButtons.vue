@@ -13,8 +13,7 @@
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
-  name: 'ColorButtons',
-  props: {},
+  name: 'ColorsBarButtons',
   computed: {
     ...mapGetters(['availableColors'])
   },
@@ -26,8 +25,8 @@ export default {
 
 <style lang="scss" scoped>
 .colors-container {
-  display: grid;
-  justify-content: left;
+  max-width: 77px;
+  padding: 0 15px 0 0;
 }
 .btn {
   margin: 12px;

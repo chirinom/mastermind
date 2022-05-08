@@ -1,22 +1,24 @@
 <template>
-  <div class="wrapper">
-    <ColorsBar />
-    <ColorInputs />
-    <FeedbackSection />
+<div class="wrapper">
+  <ColorsBar class="colors-bar" />
+  <div class="board">
+    <ColorInputButtons />
   </div>
+  <FeedbackSection />
+</div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
 import ColorsBar from './ColorsBar.vue'
-import ColorInputs from './ColorInputs.vue'
+import ColorInputButtons from './ColorInputButtons.vue'
 import FeedbackSection from './FeedbackSection.vue'
 
 export default {
   name: 'Mastermind',
   components: {
     ColorsBar,
-    ColorInputs,
+    ColorInputButtons,
     FeedbackSection
   },
   data () {
@@ -32,7 +34,7 @@ export default {
     ...mapActions(['getGame'])
   },
   mounted () {
-    this.getGame(6)
+    this.getGame(7)
   }
 }
 </script>
@@ -40,6 +42,16 @@ export default {
 <style scoped lang="scss">
 .wrapper {
   display: flex;
-  justify-content: space-evenly;
+  & .colors-bar {
+    padding: 30px 0;
+  }
+}
+.board {
+  display: flex;
+  justify-content: center;
+  padding: 30px 50px;
+  width: fit-content;
+  background-color: white;
+  border-radius: 4px;
 }
 </style>

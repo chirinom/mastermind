@@ -20,7 +20,7 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  name: 'ColorButtons',
+  name: 'ColorInputButtons',
   computed: {
     ...mapGetters(['completeSlotsList', 'currentColor'])
   },
@@ -87,9 +87,5 @@ export default {
     background-color: gray;
     cursor: not-allowed;
   }
-}
-
-@media screen and (max-width: 580px) {
-
 }
 </style>
