@@ -1,18 +1,17 @@
 <template>
-  <div class="colors-container">
+  <div class="board-wrapper">
     <div
       v-for="(guess, index) in completeSlotsList"
       :key="index"
       class="colors-guess"
     >
-      <button
+      <Button
         v-for="(color, index) in guess.code"
         :key="index"
-        :class="`btn color-btn__` + color"
+        :color="color"
         :disabled="guess.disabled"
         @click="handleInput(index)"
-      >
-      </button>
+      />
       <FeedbackPegs
         :blackPegs="guess.black_pegs"
         :whitePegs="guess.white_pegs"
@@ -24,11 +23,13 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import FeedbackPegs from './FeedbackPegs.vue'
+import Button from './Button.vue'
 
 export default {
-  name: 'ColorInputButtons',
+  name: 'GuessesBoard',
   components: {
-    FeedbackPegs
+    FeedbackPegs,
+    Button
   },
   computed: {
     ...mapGetters([
@@ -50,7 +51,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.colors-container {
+.board-wrapper {
   padding: 30px 40px;
   background-color: white;
   border-radius: 4px;
@@ -60,58 +61,8 @@ export default {
   display: flex;
   justify-content: center;
 }
-.btn {
-  margin: 12px;
-  width: 25px;
-  height: 25px;
-  background: red;
-  -moz-border-radius: 50px;
-  -webkit-border-radius: 50px;
-  border-radius: 50px;
-  border: none;
-  cursor: pointer;
-
-  &:focus {
-    box-shadow: 0 0 5px 5px lightgrey;
-  }
-  &:disabled {
-    cursor: not-allowed;
-  }
-}
-
-.color-btn {
-
-  &__red {
-    background-color: red;
-  }
-  &__blue {
-    background-color: blue;
-  }
-  &__green {
-    background-color: green;
-  }
-  &__yellow {
-    background-color: yellow;
-  }
-  &__orange {
-    background-color: orange;
-  }
-  &__white {
-    background-color: white;
-    border-style: solid;
-    border-width: 1px;
-    border-color: rgb(197, 197, 197);
-  }
-  &__lightgrey {
-    background-color: lightgray;
-  }
-  &__grey {
-    background-color: gray;
-    cursor: not-allowed;
-  }
-}
 @media screen and (max-width: 580px) {
-  .colors-container {
+  .board-wrapper {
     width: 100%!important;
     padding: 0;
     min-width: none;

@@ -2,22 +2,26 @@
   <div class="bar-container">
     <div class="current-color">
       <span class="label">Current Color</span>
-      <button :class="`btn color-btn__` + currentColor" :disabled="true"></button>
+      <Button :color="currentColor" :disabled="true"/>
     </div>
-    <button
+    <Button
       v-for="(color, index) in availableColors" :key="index"
-      @click="setCurrentColor($event.target.value)"
-      :class="`btn color-btn__` + color"
-      :value="color"
+      @click="setCurrentColor(color)"
+      :color="color"
+      :disabled="false"
     />
   </div>
 </template>
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
+import Button from './Button.vue'
 
 export default {
   name: 'ColorsBarButtons',
+  components: {
+    Button
+  },
   computed: {
     ...mapGetters(['availableColors', 'currentColor'])
   },
@@ -47,45 +51,6 @@ export default {
       font-size: 12px;
       font-weight: bold;
     }
-  }
-}
-.btn {
-  margin: 12px;
-  width: 25px;
-  height: 25px;
-  background: red;
-  -moz-border-radius: 50px;
-  -webkit-border-radius: 50px;
-  border-radius: 50px;
-  border: none;
-  cursor: pointer;
-
-  &:focus {
-    box-shadow: 0 0 5px 5px lightgrey;
-  }
-}
-
-.color-btn {
-  &__red {
-    background-color: red;
-  }
-  &__blue {
-    background-color: blue;
-  }
-  &__green {
-    background-color: green;
-  }
-  &__yellow {
-    background-color: yellow;
-  }
-  &__orange {
-    background-color: orange;
-  }
-  &__white {
-    background-color: white;
-  }
-  &__lightgrey {
-    background-color: lightgray;
   }
 }
 @media screen and (max-width: 580px) {

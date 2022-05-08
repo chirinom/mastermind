@@ -3,7 +3,7 @@
     <h1>Mastermind</h1>
     <div class="wrapper">
       <ColorsBar />
-      <ColorInputButtons />
+      <GuessesBoard />
       <ControlSection />
     </div>
   </div>
@@ -12,14 +12,14 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import ColorsBar from './ColorsBar.vue'
-import ColorInputButtons from './ColorInputButtons'
+import GuessesBoard from './GuessesBoard.vue'
 import ControlSection from './ControlSection.vue'
 
 export default {
   name: 'Mastermind',
   components: {
     ColorsBar,
-    ColorInputButtons,
+    GuessesBoard,
     ControlSection
   },
   computed: {
