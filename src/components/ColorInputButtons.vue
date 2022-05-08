@@ -43,8 +43,8 @@ export default {
 }
 .btn {
   margin: 12px;
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   background: red;
   -moz-border-radius: 50px;
   -webkit-border-radius: 50px;

@@ -111,7 +111,7 @@ const mutations = {
     // Add guesses with disabled true
     state.guesses.map(guess => fullList.push({ ...guess, disabled: true }))
 
-    // Add input slot or user input
+    // Add empty slot or user input
     if (!state.hasInput) {
       hasCheckedVals
         ? fullList.push(state.inputSlot)
