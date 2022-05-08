@@ -7,7 +7,7 @@ const state = {
   maxGuesses: 0,
   gameStatus: '',
 
-  hasInput: false,
+  inputChange: false,
   currentGuess: {
     code: []
   },
@@ -87,7 +87,7 @@ const mutations = {
   setHandleInputChange: (state, data) => {
     state.completeSlotsList.forEach((option) => {
       if (!option.disabled) {
-        state.hasInput = true
+        state.inputChange = true
         option.code[data.index] = data.color
         state.currentGuess.code = option.code
         if (state.currentGuess.code.find((a) => a === 'lightgrey') === undefined) {
@@ -112,7 +112,7 @@ const mutations = {
     state.guesses.map(guess => fullList.push({ ...guess, disabled: true }))
 
     // Add empty slot or user input
-    if (!state.hasInput && inputComplete) {
+    if (!state.inputChange && inputComplete) {
       fullList.push(emptyInputSlot)
       state.createGuessDisabled = true
     } else {
@@ -126,7 +126,7 @@ const mutations = {
     // Add available slots
     for (let i = 0; i < availableSlotsCount - 1; i++) { fullList.push(state.availableSlot) }
     state.completeSlotsList = fullList
-    state.hasInput = false
+    state.inputChange = false
   }
 }
 
