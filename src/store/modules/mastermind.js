@@ -11,7 +11,7 @@ const state = {
   currentGuess: {
     code: []
   },
-  currentColor: '',
+  currentColor: 'lightgrey',
   completeSlotsList: [],
   availableSlot: {
     black_pegs: 0,

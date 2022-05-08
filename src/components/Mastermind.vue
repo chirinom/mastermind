@@ -1,9 +1,12 @@
 <template>
-<div class="wrapper">
-  <ColorsBar class="colors-bar" />
-  <ColorInputButtons />
-  <ControlSection />
-</div>
+  <div class="mastermind">
+    <h1>Mastermind</h1>
+    <div class="wrapper">
+      <ColorsBar />
+      <ColorInputButtons />
+      <ControlSection />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -34,8 +37,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.mastermind {
+  padding: 50px;
+}
 .wrapper {
   display: flex;
-  padding: 90px;
+  padding: 20px 90px 90px;
 }
 </style>
