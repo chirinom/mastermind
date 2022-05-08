@@ -11,7 +11,7 @@
 <script>
 import { mapActions } from 'vuex'
 import ColorsBar from './ColorsBar.vue'
-import ColorInputButtons from './ColorInputButtons.vue'
+import ColorInputButtons from './ColorInputButtons'
 import ControlSection from './ControlSection.vue'
 
 export default {
