@@ -8,9 +8,7 @@ const state = {
   gameStatus: '',
 
   inputChange: false,
-  currentGuess: {
-    code: []
-  },
+  currentGuess: { code: [] },
   currentColor: 'lightgrey',
   completeSlotsList: [],
   availableSlot: {

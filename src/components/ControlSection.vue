@@ -73,4 +73,16 @@ export default {
     color: lightgreen;
   }
 }
+@media screen and (max-width: 580px) {
+  .control-wrapper {
+    max-width: none;
+    padding: 0;
+  }
+  .btn.check-answer {
+    margin: 0;
+  }
+  .label {
+    margin: 0 10px;
+  }
+}
 </style>

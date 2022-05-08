@@ -1,5 +1,5 @@
 <template>
-  <div class="colors-container">
+  <div class="bar-container">
     <div class="current-color">
       <span class="label">Current Color</span>
       <button :class="`btn color-btn__` + currentColor" :disabled="true"></button>
@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.colors-container {
+.bar-container {
   max-width: 77px;
   padding: 0 15px 0 0;
 
@@ -88,8 +88,11 @@ export default {
     background-color: lightgray;
   }
 }
-
 @media screen and (max-width: 580px) {
-
+  .bar-container {
+    padding: 0;
+    max-width: none;
+    width: 100%;
+  }
 }
 </style>

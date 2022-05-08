@@ -44,4 +44,18 @@ export default {
   display: flex;
   padding: 20px 90px 90px;
 }
+@media screen and (max-width: 950px) {
+  .mastermind {
+    padding: 0;
+  }
+}
+@media screen and (max-width: 580px) {
+  .mastermind {
+    padding: 0;
+  }
+  .wrapper {
+    display: block;
+    padding: 0;
+  }
+}
 </style>

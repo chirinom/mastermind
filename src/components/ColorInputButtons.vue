@@ -110,4 +110,11 @@ export default {
     cursor: not-allowed;
   }
 }
+@media screen and (max-width: 580px) {
+  .colors-container {
+    width: 100%!important;
+    padding: 0;
+    min-width: none;
+  }
+}
 </style>

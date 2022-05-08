@@ -20,7 +20,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.colors-bar {
+  padding: 30px 0;
+}
+@media screen and (max-width: 580px) {
   .colors-bar {
-    padding: 30px 0;
+    padding: 0;
   }
+}
 </style>
